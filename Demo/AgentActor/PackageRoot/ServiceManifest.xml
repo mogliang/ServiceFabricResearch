@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ServiceManifest xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Name="AgentActorPkg" Version="1.0.4" xmlns="http://schemas.microsoft.com/2011/01/fabric">
+   <ServiceTypes>
+      <StatefulServiceType ServiceTypeName="AgentActorServiceType" HasPersistedState="true">
+         <Extensions>
+            <Extension Name="__GeneratedServiceType__" GeneratedId="046bc4d6-a8ae-46e2-a725-bee01c0e5adb">
+               <GeneratedNames xmlns="http://schemas.microsoft.com/2015/03/fabact-no-schema">
+                  <DefaultService Name="AgentActorService" />
+                  <ServiceEndpoint Name="AgentActorServiceEndpoint" />
+                  <ReplicatorEndpoint Name="AgentActorServiceReplicatorEndpoint" />
+                  <ReplicatorConfigSection Name="AgentActorServiceReplicatorConfig" />
+                  <ReplicatorSecurityConfigSection Name="AgentActorServiceReplicatorSecurityConfig" />
+                  <StoreConfigSection Name="AgentActorServiceLocalStoreConfig" />
+               </GeneratedNames>
+            </Extension>
+         </Extensions>
+      </StatefulServiceType>
+   </ServiceTypes>
+   <CodePackage Name="Code" Version="1.0.4">
+      <EntryPoint>
+         <ExeHost>
+            <Program>AgentActor.exe</Program>
+         </ExeHost>
+      </EntryPoint>
+   </CodePackage>
+   <ConfigPackage Name="Config" Version="1.0.0" />
+   <Resources>
+      <Endpoints>
+         <Endpoint Name="AgentActorServiceEndpoint" />
+         <Endpoint Name="AgentActorServiceReplicatorEndpoint" />
+      </Endpoints>
+   </Resources>
+</ServiceManifest>

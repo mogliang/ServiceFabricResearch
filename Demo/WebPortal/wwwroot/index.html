@@ -1,0 +1,62 @@
+﻿<!DOCTYPE html>
+<html ng-app="app">
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+	<script type="text/javascript" src="node_modules/angular/angular.js"></script>
+	<script type="text/javascript" src="Script/angular-index.js"></script>
+	<link href="node_modules/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+</head>
+<body ng-controller="home">
+
+	<div class="container">
+		<h1>{{title}}</h1>
+		<div class="panel panel-default col-md-4">
+			<div class="panel-body">
+				<form>
+					<div class="form-group">
+						<label for="compid">Company</label>
+						<select class="form-control" id="compid" ng-model="newagent.compid">
+							<option value="1">Microsoft</option>
+							<option value="2">HP</option>
+							<option value="3">Lenovo</option>
+						</select>
+					</div>
+					<div class="form-group">
+						<label for="agentid">Agent Id</label>
+						<input type="text" class="form-control" id="agentid" placeholder="Id" ng-model="newagent.agentid" />
+					</div>
+					<div class="form-group">
+						<label for="agentname">Agent Name</label>
+						<input type="text" class="form-control" id="agentname" placeholder="Name" ng-model="newagent.name" />
+					</div>
+					<button class="btn btn-default" ng-disabled="waiting" ng-click="registeragent()">Register</button>
+				</form>
+			</div>
+		</div>
+		<!--<div class="panel panel-default col-md-12">
+			<div class="panel-body">-->
+		<table class="table">
+			<tr>
+				<th>Agent ID</th>
+				<th>Agent Name</th>
+				<th>Title</th>
+				<th>Efficiency</th>
+				<th>Availability</th>
+			</tr>
+			<tr ng-repeat="ag in agents">
+				<td>{{ag.EmployeeID}}</td>
+				<td>{{ag.Name}}</td>
+				<td>{{ag.Title}}</td>
+				<td>{{ag.Efficiency| number:2}}</td>
+				<td ng-show="ag.IsAvailable!=null">{{ag.IsAvailable ? "Available" : "Busy"}}</td>
+			</tr>
+		</table>
+	</div>
+	<!--</div>
+	</div>-->
+	<script src="node_modules/bootstrap/dist/js/bootstrap.js"></script>
+</body>
+</html>

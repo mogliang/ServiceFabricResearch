@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ApplicationManifest xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ApplicationTypeName="ProfileFS2Type" ApplicationTypeVersion="2.0.10" xmlns="http://schemas.microsoft.com/2011/01/fabric">
+   <Parameters>
+      <Parameter Name="ProfileMidTier_MinReplicaSetSize" DefaultValue="2" />
+      <Parameter Name="ProfileMidTier_PartitionCount" DefaultValue="6" />
+      <Parameter Name="ProfileMidTier_TargetReplicaSetSize" DefaultValue="3" />
+      <Parameter Name="AgentActorService_PartitionCount" DefaultValue="10" />
+      <Parameter Name="AgentActorService_MinReplicaSetSize" DefaultValue="2" />
+      <Parameter Name="AgentActorService_TargetReplicaSetSize" DefaultValue="3" />
+      <Parameter Name="WebPortalService_InstanceCount" DefaultValue="3" />
+   </Parameters>
+   <ServiceManifestImport>
+      <ServiceManifestRef ServiceManifestName="ProfileMidTierPkg" ServiceManifestVersion="1.0.2" />
+      <ConfigOverrides />
+   </ServiceManifestImport>
+   <ServiceManifestImport>
+      <ServiceManifestRef ServiceManifestName="AgentActorPkg" ServiceManifestVersion="1.0.4" />
+   </ServiceManifestImport>
+   <ServiceManifestImport>
+      <ServiceManifestRef ServiceManifestName="WebPortal" ServiceManifestVersion="1.0.6" />
+   </ServiceManifestImport>
+   <DefaultServices>
+      <Service Name="ProfileMidTier">
+         <StatefulService ServiceTypeName="ProfileMidTierType" TargetReplicaSetSize="[ProfileMidTier_TargetReplicaSetSize]" MinReplicaSetSize="[ProfileMidTier_MinReplicaSetSize]">
+            <UniformInt64Partition PartitionCount="[ProfileMidTier_PartitionCount]" LowKey="0" HighKey="5" />
+         </StatefulService>
+      </Service>
+      <Service Name="WebPortalService">
+         <StatelessService ServiceTypeName="WebPortalType" InstanceCount="[WebPortalService_InstanceCount]">
+            <SingletonPartition />
+         </StatelessService>
+      </Service>
+      <Service Name="AgentActorService" GeneratedIdRef="046bc4d6-a8ae-46e2-a725-bee01c0e5adb">
+         <StatefulService ServiceTypeName="AgentActorServiceType" TargetReplicaSetSize="[AgentActorService_TargetReplicaSetSize]" MinReplicaSetSize="[AgentActorService_MinReplicaSetSize]">
+            <UniformInt64Partition PartitionCount="[AgentActorService_PartitionCount]" LowKey="-9223372036854775808" HighKey="9223372036854775807" />
+         </StatefulService>
+      </Service>
+   </DefaultServices>
+</ApplicationManifest>
